@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+ Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="1.2.3" use-changelog="false" max-obj-count="7"
+	 gen-disabled-objs-code="false" show-sys-schemas-rects="true"
+	 last-position="0,-15" last-zoom="0.55" scene-rect="0,-27,1927.7,1103.8"
+	 default-schema="public" default-owner="postgres"
+	 layers="Default layer"
+	 active-layers="0"
+	 layer-name-colors="#000000"
+	 layer-rect-colors="#b4b4b4"
+	 show-layer-names="false" show-layer-rects="false">
+<role name="christopher"
+ superuser="true"
+ createdb="true"
+ replication="true"
+ createrole="true"
+ inherit="true"
+ login="true"
+ bypassrls="true"
+ password="********"
+ sql-disabled="true">
+</role>
+
+<role name="christopher_cp"
+ superuser="true"
+ createdb="true"
+ replication="true"
+ createrole="true"
+ inherit="true"
+ login="true"
+ bypassrls="true"
+ password="********"
+ sql-disabled="true">
+</role>
+
+<schema name="employees" layers="0" rect-visible="true" fill-color="#383c65" name-color="#000000">
+	<role name="christopher"/>
+</schema>
+
+<schema name="public" layers="0" rect-visible="true" fill-color="#e1e1e1" name-color="#000000" sql-disabled="true">
+</schema>
+
+<database name="employees" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
+	<role name="christopher"/>
+	<tablespace name="pg_default"/>
+</database>
+
+<schema name="employees_cp" layers="0" rect-visible="true" fill-color="#383c65" name-color="#000000">
+	<role name="christopher"/>
+</schema>
+
+<usertype name="gender_enum" configuration="enumeration">
+	<schema name="employees"/>
+	<role name="christopher"/>
+	<enumeration label="M"/>
+	<enumeration label="F"/>
+</usertype>
+
+<table name="employees" layers="0" collapse-mode="2" max-obj-count="7" z-value="0">
+	<schema name="employees"/>
+	<role name="christopher"/>
+	<position x="1280" y="40"/>
+	<column name="emp_no" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="birth_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="first_name" not-null="true">
+		<type name="character varying" length="14"/>
+		<collation name="pg_catalog.&quot;default&quot;"/>
+	</column>
+	<column name="last_name" not-null="true">
+		<type name="character varying" length="16"/>
+		<collation name="pg_catalog.&quot;default&quot;"/>
+	</column>
+	<column name="gender" not-null="true">
+		<type name="employees.gender_enum" length="0"/>
+	</column>
+	<column name="hire_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="employees_pk" type="pk-constr" table="employees.employees">
+		<columns names="emp_no" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="departments" layers="0" collapse-mode="2" max-obj-count="2" z-value="0">
+	<schema name="employees"/>
+	<role name="christopher"/>
+	<position x="160" y="40"/>
+	<column name="dept_no" not-null="true">
+		<type name="character" length="4"/>
+		<collation name="pg_catalog.&quot;default&quot;"/>
+	</column>
+	<column name="dept_name" not-null="true">
+		<type name="character varying" length="40"/>
+		<collation name="pg_catalog.&quot;default&quot;"/>
+	</column>
+	<constraint name="departments_pk" type="pk-constr" table="employees.departments">
+		<columns names="dept_no" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="dept_name" type="uq-constr" table="employees.departments">
+		<columns names="dept_name" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="dept_emp" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="employees"/>
+	<role name="christopher"/>
+	<position x="700" y="20"/>
+	<column name="emp_no" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dept_no" not-null="true">
+		<type name="character" length="4"/>
+		<collation name="pg_catalog.&quot;default&quot;"/>
+	</column>
+	<column name="from_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="to_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="dept_emp_pk" type="pk-constr" table="employees.dept_emp">
+		<columns names="emp_no,dept_no" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="titles" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="employees"/>
+	<role name="christopher"/>
+	<position x="120" y="360"/>
+	<column name="emp_no" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="title" not-null="true">
+		<type name="character varying" length="50"/>
+		<collation name="pg_catalog.&quot;default&quot;"/>
+	</column>
+	<column name="from_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="to_date">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="titles_pk" type="pk-constr" table="employees.titles">
+		<columns names="emp_no,title,from_date" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="dept_manager" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="employees"/>
+	<role name="christopher"/>
+	<position x="700" y="460"/>
+	<column name="emp_no" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dept_no" not-null="true">
+		<type name="character" length="4"/>
+		<collation name="pg_catalog.&quot;default&quot;"/>
+	</column>
+	<column name="from_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="to_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="dept_manager_pk" type="pk-constr" table="employees.dept_manager">
+		<columns names="emp_no,dept_no" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="salaries_cp" layers="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="employees"/>
+	<role name="christopher"/>
+	<position x="1400" y="400"/>
+	<column name="emp_no" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="salary" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="from_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="to_date" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="salaries_pk" type="pk-constr" table="employees.salaries_cp">
+		<columns names="emp_no,from_date" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="emp_no" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="employees.employees" table="employees.dept_emp">
+	<columns names="emp_no" ref-type="src-columns"/>
+	<columns names="emp_no" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="dept_no" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="employees.departments" table="employees.dept_emp">
+	<columns names="dept_no" ref-type="src-columns"/>
+	<columns names="dept_no" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="emp_no" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="employees.employees" table="employees.dept_manager">
+	<columns names="emp_no" ref-type="src-columns"/>
+	<columns names="emp_no" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="dept_no" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="employees.departments" table="employees.dept_manager">
+	<columns names="dept_no" ref-type="src-columns"/>
+	<columns names="dept_no" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="emp_no" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="employees.employees" table="employees.titles">
+	<columns names="emp_no" ref-type="src-columns"/>
+	<columns names="emp_no" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="emp_no" type="fk-constr" comparison-type="MATCH SIMPLE"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="employees.employees" table="employees.salaries_cp">
+	<columns names="emp_no" ref-type="src-columns"/>
+	<columns names="emp_no" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_dept_emp_employees" type="relfk" layers="0"
+	 src-table="employees.dept_emp"
+	 dst-table="employees.employees" reference-fk="emp_no"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_dept_manager_employees" type="relfk" layers="0"
+	 src-table="employees.dept_manager"
+	 dst-table="employees.employees" reference-fk="emp_no"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_dept_manager_departments" type="relfk" layers="0"
+	 src-table="employees.dept_manager"
+	 dst-table="employees.departments" reference-fk="dept_no"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_titles_employees" type="relfk" layers="0"
+	 src-table="employees.titles"
+	 dst-table="employees.employees" reference-fk="emp_no"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_dept_emp_departments" type="relfk" layers="0"
+	 src-table="employees.dept_emp"
+	 dst-table="employees.departments" reference-fk="dept_no"
+	 src-required="false" dst-required="true"/>
+
+<relationship name="rel_salaries_cp_employees" type="relfk" layers="0"
+	 src-table="employees.salaries_cp"
+	 dst-table="employees.employees" reference-fk="emp_no"
+	 src-required="false" dst-required="true"/>
+
+</dbmodel>
